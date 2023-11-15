@@ -47,6 +47,21 @@ const getMessageById = async (req, res) => {
     });
 };
 
+const deleteMessageById = async (req, res) => {
+    let id = req.params.id;
+    let message = await Message.deleteOne({id:id});
+    res.json({
+        status: "success",
+        message: "The message was removed",
+        data: [
+            {
+                message: message,
+            },
+        ],
+    });
+};
+
 module.exports.index = index;
 module.exports.create = create;
 module.exports.getMessageById = getMessageById;
+module.exports.deleteMessageById = deleteMessageById;
