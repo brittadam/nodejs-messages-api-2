@@ -2,16 +2,28 @@
 const Message = require("../../../models/Message");
 
 const index = async (req, res) => {
-    let messages = await Message.find({});
-    res.json({
-        status: "success",
-        message: "GET all messages",
-        data: [
-            {
-                messages: messages,
-            },
-        ],
-    });
+    let username = req.query.username;
+    if(username){
+        let messages = await Message.find({ username: username });
+
+        res.json({
+            status: "success",
+            message: `GET a message by username ${username}`,
+            data: messages,
+        });
+    }
+    else { 
+        let messages = await Message.find({});
+            res.json({
+                status: "success",
+                message: "GET all messages",
+                data: [
+                    {
+                        messages: messages,
+                    },
+                ],
+            });
+        }; 
 };
 
 const create = async (req, res) => {
@@ -19,6 +31,7 @@ const create = async (req, res) => {
     let m = new Message();
     m.message = message;
     m.id = 911; 
+    m.username = "pikachu";
     await m.save();
 
     res.json({
@@ -28,6 +41,7 @@ const create = async (req, res) => {
             {
                 message: m.message,
                 id: m.id,
+                username: m.username,
             },
         ],
     });
@@ -86,3 +100,4 @@ module.exports.create = create;
 module.exports.getMessageById = getMessageById;
 module.exports.deleteMessageById = deleteMessageById;
 module.exports.putMessageById = putMessageById;
+

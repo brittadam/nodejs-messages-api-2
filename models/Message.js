@@ -7,6 +7,11 @@ const MessageSchema = new Schema({
         type: Number,
         required: false,
     },
+    //add username to messages
+    username: {
+        type: String,
+        required: false,
+    },
     // message is a required string
     message: {
         type: String,
