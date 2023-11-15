@@ -10,5 +10,6 @@ router.get("/", messagesController.index);
 router.get("/:id", messagesController.getMessageById);
 router.post("/", messagesController.create);
 router.delete("/:id", messagesController.deleteMessageById);
+router.put("/:id", messagesController.putMessageById);
 
 module.exports = router;

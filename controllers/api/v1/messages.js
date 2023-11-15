@@ -61,7 +61,28 @@ const deleteMessageById = async (req, res) => {
     });
 };
 
+const putMessageById = async (req, res) => {
+    let id = req.params.id;
+
+    let message = await Message.findOne({ id: id });
+    message.message = req.body.message;
+
+    await message.save();
+
+    res.json({
+        status: "success",
+        message: "The message was updated",
+        data: [
+            {
+                message: message.message,
+            },
+        ],
+    });
+};
+
+
 module.exports.index = index;
 module.exports.create = create;
 module.exports.getMessageById = getMessageById;
 module.exports.deleteMessageById = deleteMessageById;
+module.exports.putMessageById = putMessageById;
