@@ -27,11 +27,12 @@ const index = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    let message = req.body.message;
+    let message = req.body.message.text;
+    let username = req.body.message.user;
     let m = new Message();
     m.message = message;
     m.id = 911; 
-    m.username = "pikachu";
+    m.username = username;
     await m.save();
 
     res.json({
