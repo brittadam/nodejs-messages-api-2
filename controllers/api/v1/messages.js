@@ -79,19 +79,11 @@ const deleteMessageById = async (req, res) => {
 const putMessageById = async (req, res) => {
     let id = req.params.id;
 
-    let message = await Message.findOne({ id: id });
-    message.message = req.body.message;
-
-    await message.save();
+    let message = await Message.find({ id: id });
 
     res.json({
         status: "success",
         message: "The message was updated",
-        data: [
-            {
-                message: message.message,
-            },
-        ],
     });
 };
 
